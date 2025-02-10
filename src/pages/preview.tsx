@@ -11,17 +11,18 @@ import {Button} from "@/components/UI/button.tsx";
 export function PreviewPage() {
     const location = useLocation();
     const adData = location.state;
+    const title = getTitle(adData.propertyType, adData.countRoom, adData.address);
 
-    function getTitle(adData: any) {
-        switch (adData.propertyType) {
+    function getTitle(propertyType: string, countRoom: number, address: string) {
+        switch (propertyType) {
             case 'Доля в квартире':
-                return `Доля в ${adData.countRoom} ком.кв, ${adData.address}`;
+                return `Доля в ${countRoom} ком.кв, ${address}`;
             case 'Комната':
-                return `Комната в ${adData.countRoom} ком.кв, ${adData.address}`;
+                return `Комната в ${countRoom} ком.кв, ${address}`;
             case 'Квартира':
-                return `${adData.countRoom} ком.кв, ${adData.address}`;
+                return `${countRoom} ком.кв, ${address}`;
             default:
-                return ''; // Возвращаем пустую строку, если `propertyType` неизвестен
+                return 'Объявление';
         }
     }
 
@@ -35,7 +36,7 @@ export function PreviewPage() {
             <div className="relative w-full max-w-md mx-auto mb-8">
                 <Carousel className="w-full max-w-md">
                     <CarouselContent>
-                        {adData.photos.map((file, index) => (
+                        {adData.photos.map((file: File, index: number) => (
                             <CarouselItem key={index}>
                                 <img
                                     src={URL.createObjectURL(file)}
@@ -57,7 +58,7 @@ export function PreviewPage() {
             {/* Информация об объявлении */}
             <div className=" ">
                 <p className="text-lg">
-                    {getTitle(adData)}
+                    {title}
                 </p>
                 <div className={'bg-secondary h-[1px] my-2'}></div>
                 <p className="text-lg">
