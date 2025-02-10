@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://github.com/Egor51/app",
+  "homepage": "https://egor51.github.io/app",
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite",
